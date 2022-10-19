@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "software-design-patterns"
+version = "0.1.0"
+description = ""
+authors = ["neekrasov <neekrasov@gmail.com>"]
+readme = "README.md"
+packages = [{include = "software_design_patterns"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+black = "^22.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
