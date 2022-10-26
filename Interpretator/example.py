@@ -8,13 +8,14 @@ class Token:
         MINUS = auto()
         LPAREN = auto()
         RPAREN = auto()
-    
+
     def __init__(self, type, value):
         self.type = type
         self.value = value
-    
+
     def __str__(self) -> str:
         return f"`{self.value}`"
+
 
 class Integer:
     def __init__(self, value):
@@ -23,11 +24,12 @@ class Integer:
     def __str__(self) -> str:
         return str(self.value)
 
+
 class BinaryExpression:
     class Type(Enum):
         ADDITION = auto()
         SUBTRACTION = auto()
-    
+
     def __init__(self) -> None:
         self.type = None
         self.left = None
@@ -39,6 +41,8 @@ class BinaryExpression:
             return self.left.value + self.right.value
         else:
             return self.left.value - self.right.value
+
+
 def lex(input):
     result = []
     i = 0
@@ -63,9 +67,10 @@ def lex(input):
         i += 1
     return result
 
+
 def parse(tokens):
     result = BinaryExpression()
-    have_lhs = False # have left hand side
+    have_lhs = False  # have left hand side
     i = 0
     while i < len(tokens):
         token = tokens[i]
@@ -88,7 +93,7 @@ def parse(tokens):
                 j += 1
             # We now have `tokens[i+1:j]`, which is the subexpression
             # between the parentheses
-            subexpression = tokens[i+1:j]
+            subexpression = tokens[i + 1 : j]
             element = parse(subexpression)
             if not have_lhs:
                 result.left = element
@@ -100,6 +105,7 @@ def parse(tokens):
             i = j
         i += 1
     return result
+
 
 def calc(input):
     tokens = lex(input)
